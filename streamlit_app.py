@@ -1,7 +1,7 @@
 import streamlit as st
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain_chroma import Chroma
+from langchain_community.vectorstores import FAISS
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -20,7 +20,7 @@ os.environ['HF_TOKEN']='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'
 
 embeddings=HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
-db = Chroma(persist_directory="./embedding_db", embedding_function=embeddings)
+db = FAISS.load_local("embedding_data",embeddings,allow_dangerous_deserialization=True)
 
 retriever = db.as_retriever()
 llm=ChatGroq(groq_api_key="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",model_name="Llama3-8b-8192")
