@@ -8,5 +8,4 @@ langchain_core
 langchain_chroma 
 langchain_chroma
 langchain 
-chromadb
-sqlite3 >= 3.35.0
+faiss-cpu
