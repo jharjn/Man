@@ -12,18 +12,14 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
 import os
 
-from langchain.vectorstores import Chroma
 
-#embeddings
-session_id='default'
-os.environ['HF_TOKEN']='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'
 
 embeddings=HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 db = FAISS.load_local("embedding_data",embeddings,allow_dangerous_deserialization=True)
 
 retriever = db.as_retriever()
-llm=ChatGroq(groq_api_key="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",model_name="Llama3-8b-8192")
+llm=ChatGroq(groq_api_key="")
 
 
 contextualize_q_system_prompt = (
